@@ -1,6 +1,11 @@
 package com.lxl.leetcode;
 
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ArrayNesting {
+private static final List<Object> ArrayList<Object> = null;
 /**
  * Input: A = [5,4,0,3,1,6,2]
    Output: 4
@@ -29,5 +34,11 @@ S[0] = {A[0], A[5], A[6], A[2]} = {5, 6, 2, 0}
 		}
 		return res;
 		
+	}
+	public static void main(String[] args) throws Exception {
+		List<Object> tempList= null;
+		tempList.add("1");
+		tempList.add(null);
+		System.out.println(tempList.size());
 	}
 }

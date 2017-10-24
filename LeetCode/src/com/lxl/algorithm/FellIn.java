@@ -18,6 +18,6 @@ public class FellIn {
 			}
 			public static void main(String[] args) {
 				//2个拿零钱的 1个拿整钱的
-				System.out.println(fell(2,1));
+				System.out.println(fell(5,1));
 			}
 }

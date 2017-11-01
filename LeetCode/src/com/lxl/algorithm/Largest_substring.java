@@ -15,6 +15,7 @@ public class Largest_substring {
         int n = A.length();  
         int m = B.length();  
         int num = 0;  
+        int pos = 0;
         int[][] dp = new int[n + 1][m + 1]; // ///不赋值时的初始值为0  
   
         for (int i = 1; i <= n; i++) {  
@@ -28,9 +29,12 @@ public class Largest_substring {
   
                     dp[i][j] = 0;  
                 }  
-                num = Math.max(num, dp[i][j]);  
+               // num = Math.max(num, dp[i][j]);  
+                if(dp[i][j]>num){
+                	num=dp[i][j];
+                	pos=j;
+                }
             }  
-            //return num;  /////for循环结束后才return  
         }  
         return num;  
     }///largest  

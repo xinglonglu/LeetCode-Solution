@@ -4,7 +4,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-
+//Given [1,3],[2,6],[8,10],[15,18],
+//return [1,6],[8,10],[15,18].
 public class MergeIntervals {
 	public class Interval {
 		      int start;
@@ -32,17 +33,19 @@ public class MergeIntervals {
 		});
 		
 		Interval top = intervals.get(0);
-		res.add(top);
+		int start = top.start;
+		int end = top.end;
 		for (int i = 0; i < intervals.size(); i++) {
 			Interval cur = intervals.get(i);
-			Interval top1 = intervals.get(res.size()-1);
-			if(cur.start<top1.start){
-				top1.end=Math.max(cur.end, top1.end);				
+			if(cur.start>end){
+			 res.add(new Interval(start,end));
+			 start=cur.start;
+			 end=cur.end;
 			}else{
-				res.add(cur);
+				end=Math.max(end, cur.end);
 			}
 		}
-		
+		 res.add(new Interval(start, end)); 
 		return res;
 		
 	}

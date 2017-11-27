@@ -1,24 +1,18 @@
 package com.lxl.algorithm;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
 
 public class Insertsort {
-public void sort(int n){
+public static void sort(int n){
 	int a[] ={0,3,2,1};
-	int i,j,k;
+	int i;
 	for (i = 1; i < n; i++) {
-		for(j=i-1;j>=0;j--){
-			if(a[j]<a[i]){
-				break;
-			}
+		int temp=a[i];
+		int j=i-1;
+		for (;j>=0&&a[j]>temp;j--) {
+			a[j+1]=a[j];
 		}
-		if(j!=i-1){
-			int temp = a[i];
-		for(k=i-1;k>j;k--){
-			a[k+1]=a[k];
-		}
-		a[k+1]=temp;
-	}
+		a[j+1]=temp;
 	}
 	for(int z=0;z<n;z++){
 		System.out.println(a[z]);

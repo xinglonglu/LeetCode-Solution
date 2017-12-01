@@ -44,5 +44,17 @@ public class LinkList {
 			pos = 0;
 		}
 	}
-
+	public Node reverse(){
+		Node pre = first;	
+		Node cur = first.next;
+		Node temp;
+		while(cur !=null){
+			temp=cur.next;
+			cur.next=pre;
+			pre=cur;
+			cur =temp;
+		}
+		first.next=null;
+		return pre;
+	}
 }

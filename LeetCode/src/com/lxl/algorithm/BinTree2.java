@@ -2,6 +2,7 @@ package com.lxl.algorithm;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 public class BinTree2 {
@@ -89,6 +90,21 @@ public class BinTree2 {
     		  }	  
     	  }
    	  
+      }
+      public static void LevelOrder(Node node) {
+    	  Queue<Node> queue = new LinkedList<Node>();
+    	  queue.offer(node);
+    	  Node curnode = null;
+    	  while(!queue.isEmpty()){
+    		  curnode = queue.poll();
+    		  System.out.println(curnode.date);
+    		  if(curnode.childleft!=null){
+    			  queue.offer(curnode.childleft);
+    		  }
+    		  if(curnode.childright!=null){
+    			  queue.offer(curnode.childright);
+    		  }
+    	  }
       }
       public static void main(String[] args) {
     	  BinTree2 tree = new BinTree2();

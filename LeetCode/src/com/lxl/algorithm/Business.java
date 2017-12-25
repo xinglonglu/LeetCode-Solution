@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 
 public class Business {
-		private static int state = 0;
+		private static volatile  int state = 0;
 		public static void main(String[] args) {
 			
 			final ReentrantLock lock = new ReentrantLock();
@@ -15,7 +15,7 @@ public class Business {
 				
 				@Override
 				public void run() {
-					while(state<=12){
+					while(state<=1){
 						try{
 							lock.lock();
 							if(state%3==0){
@@ -34,7 +34,7 @@ public class Business {
 				
 				@Override
 				public void run() {
-					while(state<=12){
+					while(state<=1){
 						try{
 							lock.lock();
 							if(state%3==1){
@@ -52,7 +52,7 @@ public class Business {
 				
 				@Override
 				public void run() {
-					while(state<=12){
+					while(state<=1){
 						try{
 							lock.lock();
 							if(state%3==2){

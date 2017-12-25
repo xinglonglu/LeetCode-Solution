@@ -2,6 +2,9 @@ package com.lxl.leetcode;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class BlockingQueue {
 		private  List queue = new LinkedList();
@@ -9,22 +12,33 @@ public class BlockingQueue {
 		public BlockingQueue (int limit){
 			this.limit = limit;
 		}
-		public synchronized void enqueue(Object item) throws InterruptedException {
-			while(this.queue.size()==this.limit){
-				wait();
-			}
-			if(this.queue.size()==0){
-				notifyAll();
-			}
-			this.queue.add(item);
+		Random theRandom = new Random();
+		ReentrantLock lock = new ReentrantLock();
+		Condition notfull = lock.newCondition() ;
+		Condition notempty = lock.newCondition() ;
+		public  void enqueue(Object item) throws InterruptedException {
+			lock.lock();
+				try{
+					while(queue.size()==limit){
+						notempty.await();					
+					}
+					queue.add(theRandom.nextInt());
+					notfull.signalAll();
+				}finally{
+					lock.unlock();
+				}
 		}
-		public synchronized Object dequeue() throws InterruptedException{
-			while(this.queue.size()==0){
-				wait();
+		public   void dequeue() throws InterruptedException{
+			lock.lock();
+			try {
+				while(queue.size()==0){
+					notfull.await();
+				}
+				Object a = queue.remove(queue.size()-1);
+				notempty.signalAll();
+			} finally {
+				// TODO: handle exception
+				lock.unlock();
 			}
-			if(this.queue.size()==this.limit){
-				notifyAll();
-			}
-			return this.queue.remove(0);
 		}
 }
